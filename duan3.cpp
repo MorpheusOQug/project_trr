@@ -8,7 +8,7 @@ void dfs(int A[100][100], int n, int start, vector<bool>& visited){
     q.push_back(start);
     visited[start]=true;
     for(int i=0; i<n; i++){
-        if(A[start][i]>0 && (!visited[i])){
+        if(A[start][i]==1 && (!visited[i])){
             dfs(A,n,i,visited);
         }
     }
@@ -24,7 +24,7 @@ void bfs(int A[100][100], int n, int start){
         cout<<vis<<" ";
         queue.erase(queue.begin());
         for(int i=0; i<n; i++){
-            if(A[vis][i]>0 && (!visited[i])){
+            if(A[vis][i]==1 && (!visited[i])){
                 queue.push_back(i);
                 visited[i]=true;
             }
@@ -35,7 +35,7 @@ void adj_list(int A[100][100], int n){
     vector<vector<int>> list(n);
     for(int i=0; i<n; i++){;
         for(int j=0; j<n; j++){
-            if(A[i][j]>0){
+            if(A[i][j]==1){
                 list[i].push_back(j);
             }
         }
@@ -114,6 +114,7 @@ int main(){
     fo>>n;
     cout<<n<<endl;
     int A[100][100];
+    int B[100][100];
     for(int i=0; i<n; i++){
         for(int j=0;j<n;j++){
             fo>>A[i][j];
@@ -131,5 +132,13 @@ int main(){
     }
     cout<<"\nBFS: ";
     bfs(A,n,0);
-    dijkstra(A,n,1);
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            if(A[i][j]==1){
+                cout<<"Nhap trong so tu dinh "<<i<<" den dinh "<<j<<": "; cin>>B[i][j];  
+            }
+           else B[i][j]=0;
+        }
+    }
+    dijkstra(B,n,1);
 }
